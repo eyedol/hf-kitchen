@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Perform necessary kitchen removal steps
+# after package is uninstalled.
+#
+rm /opt/hellofresh/bin/kitchen
+echo "kitchen has been uninstalled!"
+
+exit 0

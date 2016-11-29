@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Perform necessary kitchen setup steps
+# after package is installed.
+#
+
+PROGNAME=`basename $0`
+
+error_exit()
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+ln -s /usr/local/bin/kitchen /opt/hellofresh/bin/kitchen
+echo "Thank you for installing kitchen!"
+
+exit 0
