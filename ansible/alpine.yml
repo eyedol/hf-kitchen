@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+    - name:  install packages
+      raw:
+        apk -U add sudo bash python
+
+
+- hosts: all
+  tasks:
+    - name: update cache & upgrade
+      apk:
+        update_cache="yes"
