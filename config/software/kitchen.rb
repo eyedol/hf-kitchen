@@ -2,7 +2,7 @@ name "kitchen"
 relative_path "kitchen"
 
 source :git => "https://github.com/test-kitchen/test-kitchen"
-default_version "master"
+default_version "v1.14.2"
 
 dependency "ruby"
 dependency "rubygems"

@@ -1,28 +1,37 @@
-driver:
-  name: vagrant
-  forward_agent: yes
-  customize:
-    cpus: 2
-    memory: 2048
-  synced_folders:
-    - ['.', '/home/vagrant/kitchen']
+driver                    :
+    name                  : docker
+    socket                : unix:///var/run/docker.sock
+    use_sudo              : false
+    run_options           : "-v <%= File.dirname(__FILE__) %>:/kitchen"
 
-provisioner:
-  name: chef_zero
-  require_chef_omnibus: 12.4.1
+provisioner                 :
+    name                    : ansible_push
+    ansible_config          : "ansible/ansible.cfg"
+    chef_bootstrap_url      : nil
+    use_instance_name       : True
+    idempotency_test        : True
+    diff                    : True
+    sudo                    : True
+    #extra_vars                : "@kitchen_vars.yml"
+    verbose                 : "vvvv"
+    ansible_playbook_bin    : "`avm path v2.2`/ansible-playbook"
 
-platforms:
-  - name: ubuntu-14.04
-    run_list: apt::default
-  - name: ubuntu-16.04
-    run_list: apt::default
+platforms                   :
+
+  - name                    : ubuntu-16.04
+    driver_config           :
+     image                  : quay/hellofresh/build-ubuntu:latest
+     platform               : ubuntu
+    provisioner             :
+      playbook              : "ansible/ubuntu.yml"
+
+  - name                    : alpine-3.4
+    driver_config           :
+     image                  : quay/hellofresh/build-alpine:latest
+     platform               : alpine
+    provisioner             :
+      playbook              : "ansible/alpine.yml"
 
 suites:
   - name: default
-    run_list: omnibus::default
-    attributes:
-      omnibus:
-        build_user:          vagrant
-        build_user_group:    vagrant
-        build_user_password: vagrant
-        install_dir:         /opt/kitchen
+
