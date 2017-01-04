@@ -26,17 +26,17 @@ platforms                   :
     provisioner             :
         script              : build/build.sh
 
-  - name                    : osx-sierra
-    driver                  :
-      name                  : vagrant
-      box                   : http://files.dryga.com/boxes/osx-sierra-0.3.1.box
-      network               :
-                              - ["private_network", {ip: "192.168.56.110"}]
-      customize             :
-        cpus                : 2
-        memory              : 2048
-      synced_folders        :
-                              - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
+  # - name                    : osx-sierra
+  #   driver                  :
+  #     name                  : vagrant
+  #     box                   : http://files.dryga.com/boxes/osx-sierra-0.3.1.box
+  #     network               :
+  #                             - ["private_network", {ip: "192.168.56.110"}]
+  #     customize             :
+  #       cpus                : 2
+  #       memory              : 2048
+  #     synced_folders        :
+  #                             - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
     provisioner             :
         script              : build/build.sh
 suites:
