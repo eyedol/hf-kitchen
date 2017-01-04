@@ -12,7 +12,14 @@ error_exit()
   echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
   exit 1
 }
-ln -sf /opt/hellofresh/kitchen/bin/kitchen /opt/hellofresh/bin/kitchen
-echo "Thank you for installing kitchen!"
 
+mkdir -p /opt/hellofresh/bin/
+
+## Create symlink for kitchen
+ln -sf /opt/hellofresh/kitchen/bin/kitchen /opt/hellofresh/bin/kitchen
+
+## Create symlink for kitchen-ansible-inventory
+ln -s /opt/hellofresh/kitchen/embedded/bin/kitchen-ansible-inventory /opt/hellofresh/bin/
+
+echo "Thank you for installing kitchen!"
 exit 0

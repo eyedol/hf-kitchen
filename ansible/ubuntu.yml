@@ -1,8 +1,0 @@
----
-
-- name: Build
-  hosts: all
-  gather_facts: False
-  tasks:
-    - name: Update repositories cache
-      script: build.sh

@@ -5,16 +5,7 @@ driver                    :
     run_options           : "-v <%= File.dirname(__FILE__) %>:/kitchen"
 
 provisioner                 :
-    name                    : ansible_push
-    ansible_config          : "ansible/ansible.cfg"
-    chef_bootstrap_url      : nil
-    use_instance_name       : True
-    idempotency_test        : True
-    diff                    : True
-    sudo                    : True
-    #extra_vars                : "@kitchen_vars.yml"
-    verbose                 : "vvvv"
-    ansible_playbook_bin    : "`avm path v2.2`/ansible-playbook"
+  name                      : shell
 
 platforms                   :
 
@@ -23,15 +14,31 @@ platforms                   :
      image                  : quay/hellofresh/build-ubuntu:latest
      platform               : ubuntu
     provisioner             :
-      playbook              : "ansible/ubuntu.yml"
+        script              : build/build.sh
 
   - name                    : alpine-3.4
     driver_config           :
      image                  : quay/hellofresh/build-alpine:latest
      platform               : alpine
+     provision_command:
+        - sudo apk add ruby-dev patch
+     # ruby-dev
     provisioner             :
-      playbook              : "ansible/alpine.yml"
+        script              : build/build.sh
 
+  - name                    : osx-sierra
+    driver                  :
+      name                  : vagrant
+      box                   : http://files.dryga.com/boxes/osx-sierra-0.3.1.box
+      network               :
+                              - ["private_network", {ip: "192.168.56.110"}]
+      customize             :
+        cpus                : 2
+        memory              : 2048
+      synced_folders        :
+                              - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
+    provisioner             :
+        script              : build/build.sh
 suites:
   - name: default
 

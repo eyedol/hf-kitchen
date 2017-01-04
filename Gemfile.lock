@@ -37,24 +37,13 @@ GEM
     cleanroom (1.0.0)
     dep-selector-libgecode (1.3.1)
     diff-lcs (1.2.5)
-    excon (0.54.0)
     ffi (1.9.14)
     ffi-yajl (2.3.0)
       libyajl2 (~> 1.2)
     fuzzyurl (0.9.0)
     ipaddress (0.8.3)
     jmespath (1.3.1)
-    kitchen-ansiblepush (0.4.0)
-      test-kitchen
-    kitchen-ec2 (1.2.0)
-      aws-sdk (~> 2)
-      excon
-      multi_json
-      retryable (~> 2.0)
-      test-kitchen (~> 1.4, >= 1.4.1)
-    kitchen-goss (0.0.2)
-      test-kitchen
-    kitchen-vagrant (0.20.0)
+    kitchen-vagrant (0.21.1)
       test-kitchen (~> 1.4)
     kitchen-verifier-serverspec (0.6.2)
       net-ssh (~> 3)
@@ -109,7 +98,6 @@ GEM
     public_suffix (2.0.4)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    retryable (2.0.4)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -156,10 +144,7 @@ PLATFORMS
 
 DEPENDENCIES
   dep-selector-libgecode
-  kitchen-ansiblepush
   kitchen-docker!
-  kitchen-ec2
-  kitchen-goss
   kitchen-vagrant
   kitchen-verifier-serverspec
   net-ssh

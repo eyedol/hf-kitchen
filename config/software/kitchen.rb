@@ -1,22 +1,21 @@
-name "kitchen"
-relative_path "kitchen"
+name 'kitchen'
+relative_path 'kitchen'
 
-source :git => "https://github.com/test-kitchen/test-kitchen"
-default_version "v1.14.2"
+source :git => 'https://github.com/test-kitchen/test-kitchen'
+default_version 'v1.14.2'
 
-dependency "ruby"
-dependency "rubygems"
+dependency 'ruby'
+dependency 'rubygems'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
-
+  # TODO: WE should pin plugins
   gem 'install kitchen-vagrant'
   gem 'install kitchen-ec2'
   gem 'install kitchen-docker'
   gem 'install kitchen-ansiblepush'
   gem 'install kitchen-goss'
   gem 'install kitchen-verifier-serverspec'
-
-  gem "build test-kitchen.gemspec"
+  gem 'build test-kitchen.gemspec'
   gem "install test-kitchen-*.gem --no-ri --no-rdoc --bindir '#{install_dir}/bin'", env: env
 end
