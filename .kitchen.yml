@@ -11,7 +11,7 @@ platforms                   :
 
   - name                    : ubuntu-16.04
     driver_config           :
-     image                  : quay/hellofresh/build-ubuntu:latest
+     image                  : quay.com/hellofresh/kitchen-build-ubuntu:latest
      platform               : ubuntu
     provisioner             :
         script              : build/build.sh
