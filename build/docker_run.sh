@@ -2,12 +2,13 @@
 set -e
 
 ## Get script paths
-MY_PATH="`dirname \"$0\"`"          # relative
-DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
+MY_PATH="$(dirname "$0")"          # relative
+DIR="$( cd "${MY_PATH}" && pwd )"  # absolutized and normalized
+ROOT_DIR="$( cd "${ROOT_DIR}/../" && pwd )"  # absolutized and normalized
 
 ## DIR Paths
-PACKAGE_DIR="${DIR}/${PACKAGE_DIR-pr}"
-OUTPUT_DIR="${DIR}/packages/"
+PACKAGE_DIR="${ROOT_DIR}/${INPUT-pr}"
+OUTPUT_DIR="${ROOT_DIR}/packages/"
 
 ## kill docker daemon after script exits (using trap)
 ##
@@ -22,7 +23,7 @@ wrapdocker &
 sleep 5
 
 # Run kitchen <platform>
-"${DIR}"/run_kitchen.sh "${1}"
+"${ROOT_DIR}"/run_kitchen.sh "${1}"
 
 # Should move file to output dir if it does not exisit
 if ! [ -f packages/README.MD ]; then
