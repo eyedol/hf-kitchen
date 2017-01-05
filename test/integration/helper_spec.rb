@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'bundler/setup'
+#require 'bundler/setup'
 require 'serverspec'
 require 'pathname'
 require 'net/ssh'

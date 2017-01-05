@@ -22,4 +22,6 @@ sleep 5
 "${DIR}"/run_kitchen.sh "${1}"
 
 # SHould move file to output
+mv pr/pkg/* packages/
+
 exit 0

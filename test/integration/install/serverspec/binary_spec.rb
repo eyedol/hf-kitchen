@@ -1,0 +1,1 @@
+../../build/serverspec/binary_spec.rb

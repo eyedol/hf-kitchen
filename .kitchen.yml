@@ -11,13 +11,14 @@ verifier                    :
   name                      : serverspec
   remote_exec               : false
   default_pattern           : true
+  bundler_path              : /opt/hellofresh/kitchen/embedded/bin
+  rspec_path                : /opt/hellofresh/kitchen/embedded/bin
+  gemfile                   : ./test/integration/Gemfile
 
 platforms                   :
 
   - name                    : ubuntu-16.04
-    driver_config           :
-     image                  : quay.io/hellofresh/kitchen-build-ubuntu:latest
-     platform               : ubuntu
+
 
 
   - name                    : alpine-3.4
@@ -44,9 +45,15 @@ platforms                   :
 
 suites                      :
   - name                    : build
+    driver_config           :
+     image                  : quay.io/hellofresh/kitchen-build-ubuntu:latest
+     platform               : ubuntu
     provisioner             :
         script              : build/build.sh
 
   - name                    : install
+    driver_config           :
+     image                  : ubuntu:latest
+     platform               : ubuntu
     provisioner             :
         script              : build/install.sh

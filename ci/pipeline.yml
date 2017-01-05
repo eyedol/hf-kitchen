@@ -37,14 +37,28 @@ jobs:
                     type          : docker-image
                     source        :
                         repository: quay.io/hellofresh/docker-docker
-
                 inputs            :
                 - name            :  pr
-
                 run               :
-                    path          : ./build_concourse.sh
+                    path          : ./docker_run.sh
                     args          : ["build-ubuntu"]
                     dir           : pr/build
-
                 outputs           :
-                    - name        : binary
+                    - name        : packages
+
+            - task                : Install Ubuntu PR packages
+              privileged          : true
+              config              :
+                platform          : linux
+                image_resource    :
+                    type          : docker-image
+                    source        :
+                        repository: quay.io/hellofresh/docker-docker
+                inputs            :
+                - name            :  packages
+                run               :
+                    path          : ./docker_run.sh
+                    args          : ["build-ubuntu"]
+                    dir           : pr/build
+                outputs           :
+                    - name        : packages
