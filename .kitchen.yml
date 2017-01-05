@@ -16,10 +16,7 @@ verifier                    :
   gemfile                   : ./test/integration/Gemfile
 
 platforms                   :
-
   - name                    : ubuntu-16.04
-
-
 
   - name                    : alpine-3.4
     driver_config           :
@@ -27,7 +24,6 @@ platforms                   :
      platform               : alpine
      provision_command:
         - sudo apk add ruby-dev patch
-
 
   # - name                    : osx-sierra
   #   driver                  :
