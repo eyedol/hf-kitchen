@@ -1,8 +1,8 @@
-driver                    :
-    name                  : docker
-    socket                : unix:///var/run/docker.sock
-    use_sudo              : false
-    run_options           : "-v <%= File.dirname(__FILE__) %>:/kitchen"
+driver                      :
+    name                    : docker
+    socket                  : unix:///var/run/docker.sock
+    use_sudo                : false
+    run_options             : "-v <%= File.dirname(__FILE__) %>:/kitchen"
 
 provisioner                 :
   name                      : shell
@@ -11,8 +11,8 @@ verifier                    :
   name                      : serverspec
   remote_exec               : false
   default_pattern           : true
-  bundler_path              : /opt/hellofresh/kitchen/embedded/bin
-  rspec_path                : /opt/hellofresh/kitchen/embedded/bin
+  bundler_path              : <%= '/opt/hellofresh/kitchen/embedded/bin' if File.exist?('/opt/hellofresh/kitchen/embedded/bin/bundler') %>
+  rspec_path                : <%= '/opt/hellofresh/kitchen/embedded/bin' if File.exist?('/opt/hellofresh/kitchen/embedded/bin/rspec') %>
   gemfile                   : ./test/integration/Gemfile
 
 platforms                   :
