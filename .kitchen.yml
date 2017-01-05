@@ -7,14 +7,18 @@ driver                    :
 provisioner                 :
   name                      : shell
 
+verifier                    :
+  name                      : serverspec
+  remote_exec               : false
+  default_pattern           : true
+
 platforms                   :
 
   - name                    : ubuntu-16.04
     driver_config           :
      image                  : quay.io/hellofresh/kitchen-build-ubuntu:latest
      platform               : ubuntu
-    provisioner             :
-        script              : build/build.sh
+
 
   - name                    : alpine-3.4
     driver_config           :
@@ -22,9 +26,7 @@ platforms                   :
      platform               : alpine
      provision_command:
         - sudo apk add ruby-dev patch
-     # ruby-dev
-    provisioner             :
-        script              : build/build.sh
+
 
   # - name                    : osx-sierra
   #   driver                  :
@@ -39,6 +41,12 @@ platforms                   :
   #                             - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
     provisioner             :
         script              : build/build.sh
-suites:
-  - name: default
 
+suites                      :
+  - name                    : build
+    provisioner             :
+        script              : build/build.sh
+
+  - name                    : install
+    provisioner             :
+        script              : build/install.sh

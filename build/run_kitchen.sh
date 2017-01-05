@@ -12,4 +12,6 @@ gem install bundle --no-rdoc --no-ri
 cd "${DIR}/.."
 ## Install kitchen :) to build kitchen
 bundle install
-bundle exec kitchen conv "${1}"
+bundle exec kitchen test "${1}"
+
+exit 0
