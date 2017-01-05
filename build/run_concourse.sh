@@ -1,11 +1,17 @@
 #!/bin/sh
 set -e
 
+## kill docker
+##
+cleanup() {
+  pkill docker
+}
+trap cleanup EXIT
+
 MY_PATH="`dirname \"$0\"`"          # relative
 DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
 
 echo "starting docker...."
-#/etc/init.d/docker start
 wrapdocker&
 sleep 5
 
