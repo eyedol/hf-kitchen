@@ -4,10 +4,9 @@ set -e
 MY_PATH="`dirname \"$0\"`"          # relative
 DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
 
-echo "run docker"
+echo "starting docker...."
 #/etc/init.d/docker start
-#wrapdocker&
-#sleep 5
-echo "Done sleeping"
+wrapdocker&
+sleep 5
 
 "${DIR}"/run_kitchen.sh "${1}"
