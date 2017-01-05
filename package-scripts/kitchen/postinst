@@ -19,7 +19,7 @@ mkdir -p /opt/hellofresh/bin/
 ln -sf /opt/hellofresh/kitchen/bin/kitchen /opt/hellofresh/bin/kitchen
 
 ## Create symlink for kitchen-ansible-inventory
-ln -s /opt/hellofresh/kitchen/embedded/bin/kitchen-ansible-inventory /opt/hellofresh/bin/
+ln -s /opt/hellofresh/kitchen/embedded/bin/kitchen-ansible-inventory /opt/hellofresh/bin/kitchen-ansible-inventory
 
 echo "Thank you for installing kitchen!"
 exit 0

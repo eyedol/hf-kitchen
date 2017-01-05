@@ -3,7 +3,14 @@
 # Perform necessary kitchen removal steps
 # after package is uninstalled.
 #
-rm /opt/hellofresh/bin/kitchen
-echo "kitchen has been uninstalled!"
 
+## Remove kitchen dir
+rm -rf /opt/hellofresh/kitchen
+
+## Clean symlink
+rm -f /opt/hellofresh/bin/kitchen
+rm -f /opt/hellofresh/bin/kitchen-ansible-inventory
+
+
+echo "kitchen has been uninstalled!"
 exit 0
