@@ -12,13 +12,17 @@ OUTPUT_DIR="${ROOT_DIR}/packages"
 
 ## kill docker daemon after script exits (using trap)
 ##
+
 cleanup() {
+  rc="$?"
   set +e
   echo "-> Killing dockerd"
   pkill docker
   pkill dockerd
   pkill docker-containerd
-  set -e
+  sleep 5
+  echo "-> exiting with '${rc}'"
+  exit "${rc}"
 }
 trap cleanup EXIT
 
@@ -37,6 +41,5 @@ if ! [ -f "${OUTPUT_DIR}/README.md" ]; then
 else
   echo "-> Skipping copying ${PACKAGE_DIR} to ${OUTPUT_DIR}"
 fi
-echo ""
 
 exit 0
