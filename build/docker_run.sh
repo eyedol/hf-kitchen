@@ -23,10 +23,10 @@ wrapdocker &
 sleep 5
 
 # Run kitchen <platform>
-"${ROOT_DIR}"/run_kitchen.sh "${1}"
+"${DIR}"/run_kitchen.sh "${1}"
 
 # Should move file to output dir if it does not exisit
-if ! [ -f packages/README.MD ]; then
+if ! [ -f "${OUTPUT_DIR}/README.MD" ]; then
   echo ""
   echo "-> Moving ${PACKAGE_DIR} to ${OUTPUT_DIR}"
   echo ""
