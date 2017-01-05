@@ -1,0 +1,50 @@
+---
+# PR.
+#  - build for each supported platform
+#  - exec binary make sure zero is returned
+#  - check plugins
+#  - release draft art
+#  - try to install packages (
+#  - exec binary make sure zero is returned
+#  - check plugins
+
+resource_types:
+    -   name: pull-request
+        type: docker-image
+        source:
+            repository: jtarchie/pr
+
+resources:
+    -   name: pr
+        type: pull-request
+        source:
+            every: true
+            repo: hellofresh/hf-kitchen
+jobs:
+  - name   : PR build Ubuntu
+    public : false
+    serial : false
+    plan   :
+            -  get: pr
+               version: every
+               trigger: True
+
+            - task                : Build Ubuntu PR
+              privileged          : true
+              config              :
+                platform          : linux
+                image_resource    :
+                    type          : docker-image
+                    source        :
+                        repository: quay.io/hellofresh/docker-docker
+
+                inputs            :
+                - name            :  pr
+
+                run               :
+                    path          : ./build_concourse.sh
+                    args          : ["build-ubuntu"]
+                    dir           : pr/build
+
+                outputs           :
+                    - name        : binary
