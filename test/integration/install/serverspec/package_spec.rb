@@ -10,7 +10,6 @@ describe file('/opt/hellofresh/bin/kitchen') do
   it 'symlink exists' do
     expect(subject).to be_symlink
     expect(subject).to be_linked_to('/opt/hellofresh/kitchen/bin/kitchen')
-
   end
 end
 

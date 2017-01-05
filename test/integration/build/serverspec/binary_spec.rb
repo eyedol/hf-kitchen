@@ -13,7 +13,6 @@ describe 'kitchen file' do
       expect(subject).to contain('#!/opt/hellofresh/kitchen/embedded/bin/ruby')
     end
   end
-
 end
 
 describe 'kitchen-ansible-inventory file' do
@@ -29,7 +28,6 @@ describe 'kitchen-ansible-inventory file' do
       expect(subject).to contain('#!/opt/hellofresh/kitchen/embedded/bin/ruby')
     end
   end
-
 end
 
 describe command('/opt/hellofresh/kitchen/embedded/bin/ruby --version') do

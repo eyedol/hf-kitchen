@@ -1,0 +1,36 @@
+---
+##  Demo kitchen
+##
+provisioner                 :
+  name                      : shell
+
+verifier                    :
+  name                      : serverspec
+  remote_exec               : false
+  default_pattern           : true
+  bundler_path              : /opt/hellofresh/kitchen/embedded/bin
+  rspec_path                : /opt/hellofresh/kitchen/embedded/bin
+  gemfile                   : ./test/integration/Gemfile
+
+platforms                   :
+  - name                    : localhost
+    driver                  :
+      name                  : localhost
+  - name                    : aws
+    driver                  :
+      name                  : ec2
+  - name                    : vagrant
+    driver                  :
+      name                  : vagrant
+    provisioner             :
+        name                : ansible_push
+  - name                    : docker
+    driver                  :
+      name                  : docker
+    verifier                :
+      name                  : "goss"
+
+suites                      :
+  - name                    : default
+    provisioner             :
+        script              : provision.sh
