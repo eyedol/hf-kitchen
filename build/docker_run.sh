@@ -5,8 +5,9 @@ set -e
 MY_PATH="`dirname \"$0\"`"          # relative
 DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
 
-## PackageDIR paths
+## DIR Paths
 PACKAGE_DIR="${DIR}/${PACKAGE_DIR-pr}"
+OUTPUT_DIR="${DIR}/packages/"
 
 ## kill docker daemon after script exits (using trap)
 ##
@@ -25,7 +26,10 @@ sleep 5
 
 # Should move file to output dir if it does not exisit
 if ! [ -f packages/README.MD ]; then
-  mv ${PACKAGE_DIR}/* packages/
+  echo ""
+  echo "-> Moving ${PACKAGE_DIR} to ${OUTPUT_DIR}"
+  echo ""
+  cp -r ${PACKAGE_DIR}/* ${OUTPUT_DIR}
 fi
 
 exit 0
