@@ -13,8 +13,12 @@ OUTPUT_DIR="${ROOT_DIR}/packages"
 ## kill docker daemon after script exits (using trap)
 ##
 cleanup() {
-  echo "-> Killing docker"
+  set +e
+  echo "-> Killing dockerd"
   pkill docker
+  pkill dockerd
+  pkill docker-containerd
+  set -e
 }
 trap cleanup EXIT
 
