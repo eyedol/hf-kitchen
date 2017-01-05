@@ -21,4 +21,5 @@ sleep 5
 # Run kitchen <platform>
 "${DIR}"/run_kitchen.sh "${1}"
 
+# SHould move file to output
 exit 0

@@ -38,9 +38,9 @@ platforms                   :
   #       cpus                : 2
   #       memory              : 2048
   #     synced_folders        :
-  #                             - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
-    provisioner             :
-        script              : build/build.sh
+  # #                             - ["<%= File.dirname(__FILE__) %>", "/kitchen", "create: true, type: :rsync, group: :staff"]
+  #   provisioner             :
+  #       script              : build/build.sh
 
 suites                      :
   - name                    : build
