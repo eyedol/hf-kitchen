@@ -4,33 +4,35 @@ set -e
 ## Get script paths
 MY_PATH="$(dirname "$0")"          # relative
 DIR="$( cd "${MY_PATH}" && pwd )"  # absolutized and normalized
-ROOT_DIR="$( cd "${ROOT_DIR}/../" && pwd )"  # absolutized and normalized
+ROOT_DIR="$( cd "${DIR}/../../" && pwd )"  # absolutized and normalized
 
 ## DIR Paths
-PACKAGE_DIR="${ROOT_DIR}/${INPUT-pr}"
-OUTPUT_DIR="${ROOT_DIR}/packages/"
+PACKAGE_DIR="${ROOT_DIR}/pr"
+OUTPUT_DIR="${ROOT_DIR}/packages"
 
 ## kill docker daemon after script exits (using trap)
 ##
 cleanup() {
-  echo "Killing docker"
+  echo "-> Killing docker"
   pkill docker
 }
 trap cleanup EXIT
 
-echo "starting docker...."
+echo "-> Starting docker...."
 wrapdocker &
 sleep 5
 
 # Run kitchen <platform>
 "${DIR}"/run_kitchen.sh "${1}"
 
-# Should move file to output dir if it does not exisit
-if ! [ -f "${OUTPUT_DIR}/README.MD" ]; then
-  echo ""
-  echo "-> Moving ${PACKAGE_DIR} to ${OUTPUT_DIR}"
-  echo ""
+# Should copy file to output dir if it does not exisit
+echo ""
+if ! [ -f "${OUTPUT_DIR}/README.md" ]; then
+  echo "-> Copying ${PACKAGE_DIR} to ${OUTPUT_DIR}"
   cp -r ${PACKAGE_DIR}/* ${OUTPUT_DIR}
+else
+  echo "-> Skipping copying ${PACKAGE_DIR} to ${OUTPUT_DIR}"
 fi
+echo ""
 
 exit 0
