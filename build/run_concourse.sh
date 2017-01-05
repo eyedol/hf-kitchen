@@ -1,18 +1,24 @@
 #!/bin/sh
 set -e
 
-## kill docker
+## Get script paths
+MY_PATH="`dirname \"$0\"`"          # relative
+DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
+
+## kill docker daemon after script exits (using trap)
 ##
 cleanup() {
+  echo "Killing docker"
   pkill docker
 }
 trap cleanup EXIT
 
-MY_PATH="`dirname \"$0\"`"          # relative
-DIR="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
 
 echo "starting docker...."
-wrapdocker&
+wrapdocker &
 sleep 5
 
+# Run kitchen <platform>
 "${DIR}"/run_kitchen.sh "${1}"
+
+exit 0
