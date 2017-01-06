@@ -17,10 +17,8 @@ cleanup() {
   rc="$?"
   set +e
   echo "-> Killing dockerd"
-  pkill docker
-  pkill dockerd
-  pkill docker-containerd
-  sleep 5
+  pkill -9 dockerd
+  pkill -9 docker-containerd
   echo "-> exiting with '${rc}'"
   exit "${rc}"
 }
