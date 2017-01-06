@@ -8,14 +8,7 @@ image_resource    :
 
 run               :
   dir             : packages/build
-  path: sh
-  args:
-  - -exc
-  - |
-    ls -l
-    pwd
-    ./docker_run.sh
-
+  path            : ./docker_run.sh
 inputs            :
 - name            : packages
 
