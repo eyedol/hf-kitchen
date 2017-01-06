@@ -9,56 +9,37 @@
 #  - check plugins
 
 resource_types:
-    -   name: pull-request
-        type: docker-image
-        source:
-            repository: jtarchie/pr
+  - name: pull-request
+    type: docker-image
+    source:
+      repository: jtarchie/pr
 
-resources:
-    -   name: pr
-        type: pull-request
-        source:
-            every: true
-            repo: hellofresh/hf-kitchen
+resources  :
+  - name   : pr
+    type   : pull-request
+    source :
+      every: true
+      repo : hellofresh/hf-kitchen
 jobs:
   - name   : PR build Ubuntu
     public : false
     serial : false
     plan   :
-            -  get: pr
-               version: every
-               trigger: True
 
-            - task                : Build Ubuntu PR
-              privileged          : true
-              config              :
-                platform          : linux
-                image_resource    :
-                    type          : docker-image
-                    source        :
-                        repository: quay.io/hellofresh/docker-docker
-                inputs            :
-                - name            :  pr
-                run               :
-                    path          : ./docker_run.sh
-                    args          : ["build-ubuntu"]
-                    dir           : pr/build
-                outputs           :
-                    - name        : packages
+      - get                 : pr
+        version             : every
+        trigger             : True
 
-            - task                : Install Ubuntu PR packages
-              privileged          : true
-              config              :
-                platform          : linux
-                image_resource    :
-                    type          : docker-image
-                    source        :
-                        repository: quay.io/hellofresh/docker-docker
-                inputs            :
-                - name            :  packages
-                run               :
-                    path          : ./docker_run.sh
-                    args          : ["build-ubuntu"]
-                    dir           : pr/build
-                outputs           :
-                    - name        : packages
+      - task                : Build Ubuntu PR
+        file                : pr/ci/tasks/pr_build_linux.yml
+        privileged          : true
+        params              :
+          INPUT_DIR         : pr
+          RUN_ARG           : build-ubuntu
+
+      - task                : Install Ubuntu PR packages
+        file                : packages/ci/tasks/pr_install_linux.yml
+        privileged          : true
+        params              :
+          INPUT_DIR         : packages
+          RUN_ARG           : install-ubuntu
