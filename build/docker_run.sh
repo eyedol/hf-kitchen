@@ -35,7 +35,7 @@ sleep 5
 echo ""
 if ! [ -f "${OUTPUT_DIR}/README.md" ]; then
   echo "-> Copying ${INPUT_DIR} to ${OUTPUT_DIR}"
-  cp -r ${INPUT_DIR} ${OUTPUT_DIR}
+  cp -r ${INPUT_DIR}/. ${OUTPUT_DIR}
 else
   echo "-> Skipping copying ${INPUT_DIR} to ${OUTPUT_DIR}"
 fi
