@@ -7,13 +7,14 @@ image_resource    :
     repository    : quay.io/hellofresh/docker-docker
 
 run               :
-  path            : sh
   dir             : packages/build
+  path: sh
   args:
-    - -exc
-    - |
-    - pwd
-    - ls
+  - -exc
+  - |
+    ls -l
+    pwd
+    env
 
 inputs            :
 - name            : packages
