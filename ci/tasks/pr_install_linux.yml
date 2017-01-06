@@ -1,0 +1,14 @@
+---
+platform          : linux
+
+image_resource    :
+  type            : docker-image
+  source          :
+    repository    : quay.io/hellofresh/docker-docker
+
+run               :
+  path            : ./docker_run.sh
+  dir             : pr/build
+
+inputs            :
+- name            :  packages
