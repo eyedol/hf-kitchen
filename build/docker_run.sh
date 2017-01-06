@@ -29,7 +29,8 @@ wrapdocker &
 sleep 5
 
 # Run kitchen <platform>
-"${DIR}"/run_kitchen.sh "${1}"
+PLATFORM=${RUN_ARG:-$1}
+"${DIR}"/run_kitchen.sh "${PLATFORM}"
 
 # Should copy file to output dir if it does not exisit
 echo ""
