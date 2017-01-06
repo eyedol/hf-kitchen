@@ -11,7 +11,7 @@ run               :
   dir             : pr/build
 
 inputs            :
-- name            :  pr
+- name            : pr
 
 outputs           :
-- name            :  packages
+- name            : packages

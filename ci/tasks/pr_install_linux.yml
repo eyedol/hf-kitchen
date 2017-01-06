@@ -7,8 +7,17 @@ image_resource    :
     repository    : quay.io/hellofresh/docker-docker
 
 run               :
-  path            : ./docker_run.sh
+  path            : sh
   dir             : packages/build
+  args:
+    - -exc
+    - |
+    - pwd
+    - ls
 
 inputs            :
-- name            :  packages
+- name            : packages
+
+params              :
+          INPUT_DIR         : packages
+          RUN_ARG           : install-ubuntu
