@@ -14,7 +14,7 @@ run               :
   - |
     ls -l
     pwd
-    env
+    ./docker_run.sh
 
 inputs            :
 - name            : packages
