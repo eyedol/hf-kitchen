@@ -26,6 +26,7 @@ resources  :
       user: {{github-user}}
       repository: {{github-repo-name}}
       access_token: {{github-token}}
+      drafts: true
   - name: semantic-version
     type: semver
     source:
