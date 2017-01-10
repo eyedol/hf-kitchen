@@ -1,0 +1,14 @@
+---
+
+github-repo-name: "hf-kitchen"
+
+github-repo-uri: "git@github.com:hellofresh/hf-kitchen.git"
+
+github-user: "hellofresh"
+
+github-token: # here comes the access token for release upload
+
+github-private-key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  # here comes private key for semver bump
+  -----END RSA PRIVATE KEY-----
